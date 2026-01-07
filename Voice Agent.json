@@ -1,0 +1,159 @@
+{
+  "name": "Voice Agent",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "ai-task-assistant",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "678d5712-4b9d-4fd4-bd26-ec1ce612ca1b",
+      "name": "Webhook",
+      "webhookId": "6eff2b4b-e238-4670-b81d-99ed12f00056"
+    },
+    {
+      "parameters": {
+        "authentication": "oAuth2",
+        "select": "channel",
+        "channelId": {
+          "__rl": true,
+          "value": "C0A7MTQ4C0Z",
+          "mode": "list",
+          "cachedResultName": "plans"
+        },
+        "text": "=*New task loaded:*{{ $json['Task DescriptionStatus'] }}",
+        "otherOptions": {}
+      },
+      "type": "n8n-nodes-base.slack",
+      "typeVersion": 2.4,
+      "position": [
+        416,
+        0
+      ],
+      "id": "a1c361c3-305c-4974-84e2-9946e7287062",
+      "name": "Send a message",
+      "webhookId": "c729ea9e-1126-47b9-9d5e-9757108f5fef",
+      "credentials": {
+        "slackOAuth2Api": {
+          "id": "pL1UUBBR9B1Gnnul",
+          "name": "Slack account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1MWVha1WRp7a9kRrDSkDI9YtxorUXlnbD8Oyt-H8FjW0",
+          "mode": "list",
+          "cachedResultName": "Food Items",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1MWVha1WRp7a9kRrDSkDI9YtxorUXlnbD8Oyt-H8FjW0/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1MWVha1WRp7a9kRrDSkDI9YtxorUXlnbD8Oyt-H8FjW0/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Task DescriptionStatus": "={{ $json.body.task }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Timestamp",
+              "displayName": "Timestamp",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Task DescriptionStatus",
+              "displayName": "Task DescriptionStatus",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Status",
+              "displayName": "Status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        208,
+        0
+      ],
+      "id": "c78f75b2-5164-4c15-8e1a-2d2fa9220dd5",
+      "name": "Append row in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "g4iD3fdxnsI0Y7B7",
+          "name": "Google Sheets account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Append row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Append row in sheet": {
+      "main": [
+        [
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "availableInMCP": false
+  },
+  "versionId": "acbc9620-4d69-4f47-9f6b-38bdfa284ee4",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "978a55f54353b06cf7b5568bea0dc8a64f51f8959f08af0f6825a27c3b618a6b"
+  },
+  "id": "LdxSD3e9AioNVgZz",
+  "tags": []
+}
