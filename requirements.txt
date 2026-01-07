@@ -1,0 +1,16 @@
+# --- AI & Orchestration ---
+langchain>=0.3.0
+langchain-google-genai>=2.0.0
+langgraph>=0.2.0
+google-generativeai>=0.8.0
+
+# --- Communication & API ---
+requests>=2.31.0
+
+# --- Audio Handling (for Colab) ---
+ipython
+pydub
+numpy
+
+# --- Environment Management ---
+python-dotenv
