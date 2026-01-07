@@ -1,75 +1,84 @@
-#Voice-AI-Automation-Assistant-🎙️🤖
+###🎙️🤖 Voice AI Automation Assistant
+
 A multimodal AI voice assistant built with Gemini 2.5 Flash and LangGraph that automates productivity tasks by connecting to Google Sheets and Slack via n8n webhooks.
 
-🌟 Overview
-This project transforms verbal commands into structured data and automated actions. It captures audio from the browser, uses Gemini to understand the intent, and employs a stateful LangGraph agent to decide when and how to trigger external automations.
+##🌟 Overview
 
-Why this matters:
-Hands-free Productivity: Log tasks and notify teams without touching a keyboard.
+This project converts voice commands into structured actions. It records audio from the browser, uses Gemini to understand intent, and leverages a stateful LangGraph agent to decide when and how to trigger external automations.
 
-Context-Aware: Uses LangGraph to maintain state and ensure tools are only called when necessary.
+Why This Matters
 
-Extensible: The n8n backend allows for adding 500+ other integrations (Jira, Trello, Email) with minimal code changes.
+Hands-free productivity – Log tasks and notify teams without touching a keyboard
+
+Context-aware reasoning – LangGraph ensures tools are called only when needed
+
+Highly extensible – n8n enables 500+ integrations (Jira, Trello, Email, etc.) with minimal changes
 
 🛠️ Tech Stack
-LLM: Google Gemini 2.5 Flash (Multimodal processing)
+
+LLM: Google Gemini 2.5 Flash (Multimodal)
 
 Orchestration: LangGraph (Agentic state machine)
 
-Automation: n8n (Workflow automation engine)
+Automation: n8n (Workflow automation)
 
-Environment: Google Colab / Python
+Environment: Python / Google Colab
 
 Integrations: Google Sheets API, Slack API
 
 📐 System Architecture
-Audio Capture: Python code in Colab records audio and sends it to Gemini.
 
-Reasoning (The Brain): Gemini transcribes and extracts "Task Details."
+Audio Capture – Python code in Colab records audio input
 
-Routing (The Logic): LangGraph checks if the output requires an action.
+Reasoning (Brain) – Gemini transcribes speech and extracts task details
 
-Execution (The Hands): An HTTP POST request is sent to an n8n Webhook.
+Routing (Logic) – LangGraph decides whether an action is required
 
-Automation: n8n simultaneously appends a row to Google Sheets and pings a Slack channel.
+Execution (Hands) – HTTP POST request sent to an n8n Webhook
+
+Automation – n8n logs the task in Google Sheets and sends a Slack notification
 
 🚀 Getting Started
 Prerequisites
-A Google AI Studio API Key.
 
-An n8n account (Cloud or Desktop).
+Google AI Studio API Key
 
-A Slack Workspace (with a Bot Token xoxb-...).
+n8n account (Cloud or Desktop)
 
-A Google Sheet with headers: Timestamp, Task, Status.
+Slack workspace with a Bot Token (xoxb-...)
 
-1. n8n Setup
-Import the workflow.json (found in this repo) into n8n.
+Google Sheet with headers: Timestamp, Task, Status
 
-Set your Google Sheets and Slack credentials.
+1️⃣ n8n Setup
 
-Copy your Production Webhook URL.
+Import n8n_workflow.json into n8n
 
-2. Colab Setup
-Open the provided .ipynb file.
+Configure Google Sheets and Slack credentials
 
-Add your API keys to the Secrets/Environment variables.
+Copy the Production Webhook URL
 
-Paste your n8n Webhook URL into the trigger_automation_task tool function.
+2️⃣ Colab Setup
 
-📝 Example Commands
-"Add a task to call the design team tomorrow morning."
+Open the provided .ipynb file
 
-"Remind me to buy coffee beans today."
+Add API keys to environment variables / secrets
 
-"Log a new task: Update the project documentation on GitHub."
+Paste your n8n Webhook URL into the trigger_automation_task function
+
+📝 Example Voice Commands
+
+“Add a task to call the design team tomorrow morning.”
+
+“Remind me to buy coffee beans today.”
+
+“Log a new task: Update the project documentation on GitHub.”
 
 📂 Repository Structure
-Assistant_Logic.ipynb: The main Python notebook containing the LangGraph logic.
-
-n8n_workflow.json: The exported n8n workflow file for easy import.
-
-requirements.txt: Python dependencies.
+├── Assistant_Logic.ipynb    # Main LangGraph-based assistant logic
+├── n8n_workflow.json       # n8n workflow for Sheets + Slack automation
+├── requirements.txt        # Python dependencies
 
 🤝 Contributing
-Contributions are welcome! If you'd like to add new tools (like a Calendar integration) or improve the voice recording logic, please open an issue or a PR.
+
+Contributions are welcome!
+If you’d like to add new integrations (e.g., Google Calendar) or improve the voice recording logic, feel free to open an issue or submit a pull request.
